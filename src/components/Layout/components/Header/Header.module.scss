@@ -1,4 +1,7 @@
 .wrapper {
+    --search-height: 46px;
+    --search-button-width: 52px;
+
     height: var(--default-layout-header-height, 60px);
     width: 100%;
     box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
@@ -8,5 +11,81 @@
     .inner {
         height: 100%;
         width: var(--default-layout-width);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        .search {
+            position: relative;
+            background: rgba(22, 24, 35, 0.06);
+            height: var(--search-height);
+            width: 362px;
+            padding-left: 16px;
+            border-radius: 92px;
+            display: flex;
+            overflow: hidden;
+            border: 1.5px solid transparent;
+
+            &::after {
+                content: '';
+                height: calc(var(--search-height) - 18px);
+                width: 2px;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: var(--search-button-width);
+                background-color: rgba(22, 24, 35, 0.12);
+            }
+
+            &:focus-within {
+                border-color: rgba(22, 24, 35, 0.2);
+            }
+
+            input {
+                color: var(--black);
+                caret-color: var(--primary);
+                font-size: 1.6rem;
+                background-color: transparent;
+                height: 100%;
+                flex: 1;
+            }
+
+            input:not(:placeholder-shown) ~ .search-btn {
+                color: rgba(22, 24, 35, 0.8);
+                transition: all 0.3s ease;
+            }
+
+            .clear,
+            .loading {
+                position: absolute;
+                font-size: 16px;
+                right: calc(var(--search-button-width) + 16px);
+                top: 50%;
+                transform: translateY(-50%);
+                color: rgba(22, 24, 35, 0.34);
+            }
+
+            .search-btn {
+                width: var(--search-button-width);
+                height: 100%;
+                background-color: transparent;
+                font-size: 1.8rem;
+                cursor: pointer;
+                color: #bfbfbf;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background-color: rgba(22, 24, 35, 0.06);
+                    color: var(--black);
+                }
+
+                &:active {
+                    background-color: rgba(22, 24, 35, 0.02);
+                }
+            }
+        }
     }
 }
